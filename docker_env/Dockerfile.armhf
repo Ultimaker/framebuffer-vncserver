@@ -1,0 +1,26 @@
+FROM arm32v7/ubuntu:20.04
+
+ENV DEBIAN_FRONTEND=noninteractive
+
+RUN apt-get update && apt-get install -y \
+    ca-certificates
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    wget \
+    curl \
+    ninja-build \
+    git \
+    file \
+    pkg-config \
+    libvncserver-dev \
+    software-properties-common \
+    gnupg \
+ && wget --no-check-certificate -O - https://apt.kitware.com/keys/kitware-archive-latest.asc | apt-key add - \
+ && apt-add-repository 'deb https://apt.kitware.com/ubuntu/ focal main' \
+ && apt-get update \
+ && apt-get install -y cmake \
+ && apt-get clean
+
+WORKDIR /build/framebuffer-vncserver
+
+RUN git config --global --add safe.directory /build

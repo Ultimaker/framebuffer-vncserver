@@ -1,0 +1,10 @@
+[Unit]
+Description=Framebuffer VNC Server service
+After=okuda.touchui@0.service
+
+[Service]
+Type=exec
+ExecStart=/usr/bin/framebuffer-vncserver.sh
+
+[Install]
+WantedBy=griffin.target

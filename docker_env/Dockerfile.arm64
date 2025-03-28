@@ -1,0 +1,18 @@
+FROM arm64v8/ubuntu:20.04
+
+ENV DEBIAN_FRONTEND=noninteractive
+
+RUN apt-get update && apt-get install -y \
+    ca-certificates \
+    build-essential \
+    cmake \
+    ninja-build \
+    git \
+    file \
+    pkg-config \
+    libvncserver-dev \
+    && apt-get clean
+
+WORKDIR /build/framebuffer-vncserver
+
+RUN git config --global --add safe.directory /build

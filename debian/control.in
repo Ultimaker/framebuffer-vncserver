@@ -1,0 +1,8 @@
+Package: ulti-remote-display
+Version: @RELEASE_VERSION@
+Architecture: @ARCH@
+Maintainer: Ultimaker <embeddedsystems@ultimaker.com>
+Section: admin
+Priority: optional
+Description: VNC server to allow remote connection to Okuda, including touch screen functionality
+Depends: libvncserver1
