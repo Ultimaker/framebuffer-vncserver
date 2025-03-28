@@ -36,5 +36,6 @@ ui_*.h
 !.git*
 !.travis*
 
-build/
+_build_armhf/
+_build_arm64/
 *.log
