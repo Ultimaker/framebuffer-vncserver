@@ -38,3 +38,6 @@ ui_*.h
 
 build/
 *.log
+
+_build*/
+*.deb
