@@ -36,9 +36,17 @@ create_debian_package()
        "${SRC_DIR}/debian/control.in" > "${DEB_DIR}/DEBIAN/control"
 
 
-    TARGET_FOLDER="${DEB_DIR}/usr/bin/"
-    mkdir -p "${TARGET_FOLDER}" 
-    cp "${BUILD_DIR}_${ARCH}/framebuffer-vncserver" "${TARGET_FOLDER}"
+    TARGET_BIN_FOLDER="${DEB_DIR}/usr/bin/"
+    TARGET_SERVICE_FOLDER="${DEB_DIR}/etc/systemd/system/"
+    mkdir -p "${TARGET_BIN_FOLDER}" "${TARGET_SERVICE_FOLDER}"
+
+    # Copy the framebuffer binary and script to the binary folder
+    cp "${BUILD_DIR}_${ARCH}/framebuffer-vncserver" "${SRC_DIR}/framebuffer-vncserver.sh" "${TARGET_BIN_FOLDER}"
+
+    # Copy the service to the systemd service folder
+    cp "${SRC_DIR}/framebuffer-vncserver.service" "${TARGET_SERVICE_FOLDER}"
+
+    # Copy the debian postinst script
     cp "${SRC_DIR}/debian/postinst" "${DEB_DIR}/DEBIAN/"
 
     DEB_PACKAGE="${PACKAGE_NAME}_${RELEASE_VERSION}_${ARCH}.deb"
