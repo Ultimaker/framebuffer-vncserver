@@ -8,14 +8,15 @@
 
 set -eu
 
-TOUCHSCREEN_ADDR="0038"
+TOUCHSCREEN_ADDR_EDT="0038"
+TOUCHSCREEN_ADDR_GOODIX="005d"
 TOUCH_EVENT=""
 
-for EVENT in {0..5}; do
-  if readlink "/sys/class/input/event${EVENT}" | grep -q -e "[0-5]-${TOUCHSCREEN_ADDR}"; then
-    TOUCH_EVENT="${EVENT}";
-  fi;
-done;
+for EVENT_PATH in /sys/class/input/event*; do
+  if readlink "${EVENT_PATH}" | grep -qE "${TOUCHSCREEN_ADDR_EDT}|${TOUCHSCREEN_ADDR_GOODIX}"; then
+    TOUCH_EVENT="${EVENT_PATH##*/event}"
+  fi
+done
 
 touchscreen_input="/dev/input/event${TOUCH_EVENT}"
 
